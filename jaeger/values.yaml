@@ -3,10 +3,6 @@ storage:
 provisionDataStore:
   cassandra: false
   elasticsearch: false
-hotrod:
-  enabled: true
-  service:
-    port: 8080
 query:
   service:
     port: 16686
