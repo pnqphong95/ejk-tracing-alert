@@ -1,8 +1,16 @@
 storage:
   type: elasticsearch
+  elasticsearch:
+    cmdlineParams:
+      es.tags-as-fields.all: true
 provisionDataStore:
   cassandra: false
   elasticsearch: false
+collector:
+  cmdlineParams:
+    es.tags-as-fields.all: true
 query:
+  cmdlineParams:
+    es.tags-as-fields.all: true
   service:
     port: 16686

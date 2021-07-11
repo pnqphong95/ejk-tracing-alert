@@ -1,13 +1,11 @@
 package com.pnqphong.playground.serviceone;
 
-import java.util.Random;
-
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.WebApplicationException;
 
 import com.pnqphong.playground.serviceone.client.ServiceTwoRestClient;
+import com.pnqphong.playground.serviceone.client.exception.MyException;
 
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
@@ -21,13 +19,13 @@ public class MyResource {
     @GET
     @Path("/hello")
     public String sayHello() {
-        boolean error = new Random().nextBoolean();
-        if (!error) {
-            StringBuilder message = new StringBuilder("Service One: Hello -> ");
+        StringBuilder message = new StringBuilder("Service One: Hello -> ");
+        try {
             message.append(serviceTwo.sayHello());
-            return message.toString();
+        } catch (MyException e) {
+            message.append("Service Two got error -> ");
         }
-        throw new WebApplicationException("Unexpected error from service one.");
+        return message.toString();
     }
 
 }
